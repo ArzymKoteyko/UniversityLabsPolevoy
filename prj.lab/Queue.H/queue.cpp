@@ -17,28 +17,20 @@ Queue::Node::Node(int val) {
 
 void Queue::push(const int& val) {
     if (front) {
-        if (front->child_count == 0) {
-            front->left = std::shared_ptr<Queue::Node>(new Node(val));
-            front->left->prev = tail;
-            front->left->parent = front;
-            tail->next = front->left;
-            tail = front->left;
-            front->child_count++;
-            buble_up();
-        }
-        else {
-            front->right = std::shared_ptr<Queue::Node>(new Node(val));
-            front->right->prev = tail;
-            front->right->parent = front;
-            tail->next = front->right;
-            tail = front->right;
-            front->child_count++;
+        std::shared_ptr<Queue::Node>& child = (front->child_count == 1 ? front->right : front->left);
+        child.reset(new Node(val));
+        child->prev = tail;
+        child->parent = front;
+        tail->next = child;
+        tail = child;
+        front->child_count++;
+        if (front->child_count == 1) {
             front = front->next;
-            buble_up();
         }
+        buble_up();
     }
     else {
-        front = std::shared_ptr<Queue::Node>(new Node(val));
+        front.reset(new Node(val));
         head = front;
         tail = front;
     }

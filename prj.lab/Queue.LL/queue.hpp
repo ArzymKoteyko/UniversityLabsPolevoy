@@ -21,8 +21,7 @@ class Queue {
             friend Queue;
         };
         std::unique_ptr<Node> head_;
-        void insert(const int&, std::unique_ptr<Node>&);
-        std::unique_ptr<Node>& find_position(const int& val, std::unique_ptr<Node>&); 
+        void insert(const int&, std::unique_ptr<Node>&); 
     public:
         Queue() = default;
         Queue(const Queue&);

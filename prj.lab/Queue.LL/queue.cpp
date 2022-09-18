@@ -16,23 +16,39 @@ bool Queue::is_empty() const {
 }
 
 
-void Queue::insert(const int& val, std::unique_ptr<Queue::Node>& node) {
-    if (node->next_node_) {
-        Queue::insert(val, node->next_node_);
-    }   
-    else {
-        node->next_node_.reset(new Queue::Node(val));
-    }
+void Queue::insert(const int& val, std::unique_ptr<Queue::Node>& ancestor) {
+    std::unique_ptr<Node> new_node = std::unique_ptr<Node>(new Node(val));
+    new_node->next_node_.swap(ancestor);
+    ancestor.swap(new_node);
+}
 
-    if (node->val_ > node->next_node_->val_) {
-        std::swap(node->val_, node->next_node_->val_);
+
+auto Queue::find_position(const int& val, std::unique_ptr<Node>& node) -> std::unique_ptr<Node>& {
+    /*
+    std::unique_ptr<std::unique_ptr<Node>> cursor = std::unique_ptr<std::unique_ptr<Node>>(&node);
+    while ((*cursor)->next_node_) {
+        if (val <= (*cursor)->val_) {
+            return *cursor;
+        }
+        cursor.reset(&(*cursor)->next_node_);
     }
+    return (*cursor)->next_node_;
+    */
+    std::unique_ptr<Node>* cursor = &node;
+
+    while ((*cursor)->next_node_) {
+        if (val <= (*cursor)->val_) {
+            return *cursor;
+        }
+        cursor = &(*cursor)->next_node_;
+    }
+    return (*cursor)->next_node_;
 }
 
 
 void Queue::push(const int& val) {
     if (!Queue::is_empty()) {
-        Queue::insert(val, head_);
+        insert(val, find_position(val, head_));
     }
     else {
         head_.reset(new Node(val));

@@ -27,6 +27,12 @@ int main() {
     q.pop();
     q.pop();
     q.pop();
+    q.pop();
+    q.pop();
+    q.pop();
+    q.pop();
+    q.pop();
+    q.push(1);
     std::cout << q.top() << std::endl;
 
     std::queue<int> check;

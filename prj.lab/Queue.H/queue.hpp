@@ -19,7 +19,7 @@ class Queue {
                 Node() = default;
                 Node(const Node&);
                 Node& operator=(const Node&);
-                Node(int);
+                Node(const int&);
                 ~Node() = default;
                 friend Queue;
                 friend std::ostream& operator<<(std::ostream&, const Queue&);

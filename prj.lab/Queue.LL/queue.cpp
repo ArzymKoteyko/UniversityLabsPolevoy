@@ -24,25 +24,20 @@ void Queue::insert(const int& val, std::unique_ptr<Queue::Node>& ancestor) {
 
 
 auto Queue::find_position(const int& val, std::unique_ptr<Node>& node) -> std::unique_ptr<Node>& {
-    /*
     std::unique_ptr<std::unique_ptr<Node>> cursor = std::unique_ptr<std::unique_ptr<Node>>(&node);
     while ((*cursor)->next_node_) {
         if (val <= (*cursor)->val_) {
-            return *cursor;
+            std::unique_ptr<Node>& answer = (*cursor);
+            cursor.release();
+            return answer;
         }
-        cursor.reset(&(*cursor)->next_node_);
+        std::unique_ptr<std::unique_ptr<Node>> next_cursor = std::unique_ptr<std::unique_ptr<Node>>(&(*cursor)->next_node_);
+        cursor.swap(next_cursor);
+        next_cursor.release();
     }
-    return (*cursor)->next_node_;
-    */
-    std::unique_ptr<Node>* cursor = &node;
-
-    while ((*cursor)->next_node_) {
-        if (val <= (*cursor)->val_) {
-            return *cursor;
-        }
-        cursor = &(*cursor)->next_node_;
-    }
-    return (*cursor)->next_node_;
+    std::unique_ptr<Node>& answer = (*cursor)->next_node_;
+    cursor.release();
+    return answer;
 }
 
 

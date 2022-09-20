@@ -35,12 +35,5 @@ int main() {
     q.push(1);
     std::cout << q.top() << std::endl;
 
-    std::queue<int> check;
-    std::cout << "OK" << std::endl;
-
-    std::cout << check.front() << std::endl;
-
-    
-
     return 0;
 }    

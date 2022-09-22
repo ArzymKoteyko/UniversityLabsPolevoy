@@ -12,10 +12,7 @@ long long ammount(long long lenght, const std::vector<long long>& array) {
 
 
 long long bin_ser_l (long long val, const std::vector<long long>& array) {
-<<<<<<< HEAD
-    long long l = -1;
-    long long r = 9223372036854775000;
-=======
+
     long long l = 0;
     long long r = 0;
     for (int i=0; i<array.size(); ++i) {
@@ -23,7 +20,6 @@ long long bin_ser_l (long long val, const std::vector<long long>& array) {
     }
     ++r;
     //long long r = sum(array) / val + 2*val;
->>>>>>> origin/contest_fix
     while (r-l>1) {
         long long A = ammount((l+r)/2, array); 
         if (ammount((l+r)/2, array) < val) {

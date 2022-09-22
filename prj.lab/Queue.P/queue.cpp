@@ -35,9 +35,16 @@ auto QueueP::find_position(const int& val, std::unique_ptr<Node>& node) -> std::
         cursor.swap(next_cursor);
         next_cursor.release();
     }
-    std::unique_ptr<Node>& answer = (*cursor)->next_node_;
-    cursor.release();
-    return answer;
+    if (val <= (*cursor)->val_) {
+        std::unique_ptr<Node>& answer = (*cursor);
+        cursor.release();
+        return answer;
+    }
+    else {
+        std::unique_ptr<Node>& answer = (*cursor)->next_node_;
+        cursor.release();
+        return answer;  
+    }
 }
 
 

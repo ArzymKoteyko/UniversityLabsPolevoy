@@ -26,7 +26,9 @@ class QueueP {
     public:
         QueueP() = default;
         QueueP(const QueueP&);
+        QueueP(QueueP&&);
         QueueP& operator=(const QueueP&);
+        QueueP&& operator=(QueueP&&);
         ~QueueP() = default;
         void push(const int&);
         void pop();

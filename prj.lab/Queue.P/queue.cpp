@@ -6,10 +6,35 @@ QueueP::Node::Node(const int& val) {
 }
 
 
+/*
 QueueP::Node::~Node() {
     std::cout << "..~Node  val: " << val_ << " pointer: " << this << std::endl;
+}*/
+
+
+QueueP::QueueP(const QueueP& queue) {
+    if (!queue.is_empty()) {
+        const std::unique_ptr<Node>* cursor = &(queue.head_);
+        do {
+            this->push((*cursor)->val_);
+            cursor = &((*cursor)->next_node_);
+        }
+        while((*cursor));
+    }
 }
 
+/*
+QueueP& QueueP::operator=(const QueueP& queue) {
+    return QueueP(queue);
+}
+*/
+
+QueueP::QueueP(QueueP&& queue) {
+    while(!queue.is_empty()) {
+        this->push(queue.top());
+        queue.pop();
+    }
+}
 
 bool QueueP::is_empty() const {
     return !bool(head_);

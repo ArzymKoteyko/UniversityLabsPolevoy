@@ -17,7 +17,7 @@ class QueueP {
                 Node(const Node&);
                 Node(const int&);
                 Node& operator=(const Node&);
-                ~Node();
+                ~Node() = default;
             friend QueueP;
         };
         std::unique_ptr<Node> head_;

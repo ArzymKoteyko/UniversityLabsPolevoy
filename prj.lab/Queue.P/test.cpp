@@ -104,6 +104,7 @@ TEST_CASE("QueueP pop method") {
     queue.push(0);
     queue.pop();
     CHECK(queue.is_empty() == true);
+    CHECK_THROWS_AS(queue.pop(), std::out_of_range);
     std::vector<int> sample;
     sample = {1,2,3,4,5};
     queue_from_sample_pop_all_and_check(sample);
@@ -177,3 +178,4 @@ TEST_CASE("Checkking QueueP move constructor") {
         b_queue.pop();
     }
 }
+

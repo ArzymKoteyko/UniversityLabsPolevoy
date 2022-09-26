@@ -21,19 +21,19 @@ class QueueP {
             friend QueueP;
         };
         std::unique_ptr<Node> head_;
-        void insert(const int&, std::unique_ptr<Node>&);
-        std::unique_ptr<Node>& find_position(const int& val, std::unique_ptr<Node>&);  
+        void insert(const int&, std::unique_ptr<Node>&) noexcept;
+        std::unique_ptr<Node>& find_position(const int& val, std::unique_ptr<Node>&) const noexcept;   
     public:
         QueueP() = default;
-        QueueP(const QueueP&);
-        QueueP(QueueP&&);
-        QueueP& operator=(const QueueP&);
-        QueueP&& operator=(QueueP&&);
+        QueueP(const QueueP&) noexcept;
+        QueueP(QueueP&&) noexcept;
+        QueueP& operator=(const QueueP&) noexcept;
+        QueueP&& operator=(QueueP&&) noexcept;
         ~QueueP() = default;
-        void push(const int&);
+        void push(const int&) noexcept;
         void pop();
         int top() const;
-        bool is_empty() const;
+        bool is_empty() const noexcept;
 };
 
 
